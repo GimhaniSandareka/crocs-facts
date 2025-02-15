@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .fact {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fact">Hover over the button to start!</div>
+        <button>Show Random Fact</button>
+    </div>
+    <script>
+        const facts = [
+            {
+                "fact": "Crocodiles are large aquatic reptiles that live throughout the tropics in Africa, Asia, the Americas, and Australia."
+            },
+            {
+                "fact": "They are members of the order Crocodylia, which also includes alligators, caimans, and gharials."
+            },
+            {
+                "fact": "Crocodiles have powerful jaws with many conical teeth and short legs with clawed webbed toes."
+            },
+            {
+                "fact": "They are excellent swimmers and can hold their breath underwater for up to an hour."
+            },
+            {
+                "fact": "Crocodiles have a lifespan of 35 to 75 years, depending on the species."
+            },
+            {
+                "fact": "The largest species, the saltwater crocodile, can grow up to 23 feet long and weigh over 2,200 pounds."
+            },
+            {
+                "fact": "Crocodiles are carnivorous and have a diet that includes fish, birds, mammals, and occasionally smaller crocodiles."
+            },
+            {
+                "fact": "They have a unique heart structure with four chambers, similar to birds and mammals, which allows efficient oxygenation of blood."
+            },
+            {
+                "fact": "Crocodiles communicate with each other through vocalizations, including growls, hisses, and roars."
+            },
+            {
+                "fact": "They are known for their ambush hunting technique, where they wait for prey to come close before launching a surprise attack."
+            }
+        ];
+
+        let attempts = 0;
+        const maxAttempts = 3;
+        const button = document.querySelector('button');
+        const factDisplay = document.querySelector('.fact');
+
+        function displayRandomFact() {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            factDisplay.textContent = facts[randomIndex].fact;
+        }
+
+        button.addEventListener('click', () => {
+            if (attempts >= maxAttempts) {
+                displayRandomFact();
+            } else {
+                alert('Try again!');
+            }
+        });
+
+        button.addEventListener('mouseover', () => {
+            if (attempts < maxAttempts) {
+                const x = Math.random() * (window.innerWidth - button.offsetWidth);
+                const y = Math.random() * (window.innerHeight - button.offsetHeight);
+                button.style.transform = `translate(${x}px, ${y}px)`;
+                attempts++;
+            }
+        });
+    </script>
+</body>
+</html>
