@@ -13,46 +13,73 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #065130d8;
+            overflow: hidden;
+        } 
+        .wrapper{
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .container {
             width: 80%;
             max-width: 600px;
-            background-color: #fff;
+            background-color: #011b10d8;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             text-align: center;
-            overflow: hidden;
+            position: relative;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
         }
 
         .fact {
             font-size: 1.2em;
+            color: #fff;
             margin-bottom: 20px;
         }
 
         button {
             padding: 10px 20px;
             font-size: 1em;
-            color: #fff;
-            background-color: #007bff;
+            color: #ffffff;
+            background-color: #2a5142;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            position: absolute;
             transition: transform 0.3s ease;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #0f7681;
+        }
+        .image-container img{
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            
         }
     </style>
 </head>
 <body>
+  <div class="wrapper">
     <div class="container">
         <div class="fact">Hover over the button to start!</div>
-        <button>Show Random Fact</button>
+        <button id="factButton">Show Random Fact</button>
     </div>
+    <div class="image-container">
+        <img src="cool-croc.png" alt="I'm a crocodile">
+    </div>
+  </div>
     <script>
         const facts = [
             {
@@ -89,8 +116,9 @@
 
         let attempts = 0;
         const maxAttempts = 3;
-        const button = document.querySelector('button');
+        const button = document.getElementById("factButton");
         const factDisplay = document.querySelector('.fact');
+        const container = document.querySelector('.container');
 
         function displayRandomFact() {
             const randomIndex = Math.floor(Math.random() * facts.length);
@@ -107,9 +135,13 @@
 
         button.addEventListener('mouseover', () => {
             if (attempts < maxAttempts) {
-                const x = Math.random() * (window.innerWidth - button.offsetWidth);
-                const y = Math.random() * (window.innerHeight - button.offsetHeight);
-                button.style.transform = `translate(${x}px, ${y}px)`;
+                // const x = Math.random() * (window.innerWidth - button.offsetWidth);
+                // const y = Math.random() * (window.innerHeight - button.offsetHeight);
+                const maxX = window.innerWidth - button.offsetWidth;
+                const maxY = window.innerHeight - button.offsetHeight;
+                const x = Math.random() * (maxX - 20) + 10;
+                const y = Math.random() * (maxY - 20) + 10;
+                button.style.transform = `translate(${x - window.innerWidth /2}px, ${y -  window.innerHeight / 2}px)`;
                 attempts++;
             }
         });
